@@ -14,23 +14,20 @@ public class StreamAPI {
         Person p6 = new Person(6, "Tural", "Cemilli", "32");
         List<Person> personList = Arrays.asList(p1, p2, p3, p4, p5, p6);
 
-        List<Person> listOfPeopleAbove18 = personList.stream()
+        personList.stream()
                 .filter(item -> Integer.parseInt(item.age) > 18)
-                .collect(Collectors.toList());
-        listOfPeopleAbove18.forEach(item -> System.out.println(item.toString()));
+                .collect(Collectors.toList())
+                .stream()
+                .forEach(item -> System.out.println(item.toString()));
 
-
-        double mean = personList.stream()
+        System.out.println(personList.stream()
                 .map(item -> Integer.parseInt(item.age))
-                .reduce(0, Integer::sum).doubleValue() / personList.size();
-        System.out.println(mean);
+                .reduce(0, Integer::sum).doubleValue() / personList.size());
 
-
-        int sum = personList.stream()
+        System.out.println(personList.stream()
                 .map(item -> Integer.parseInt(item.age))
                 .filter(item -> item > 18)
-                .reduce(0, (e1, e2) -> e1 + e2);
-        System.out.println(sum);
+                .reduce(0, (e1, e2) -> e1 + e2));
 
     }
 }
